@@ -1,0 +1,50 @@
+import time
+from game.connect4 import get_legal_moves
+from llm.prompt_builder import build_move_prompt
+from llm.output_parser import parse_move_response
+
+
+def choose_llm_move(board, player, llm_client, return_debug=False):
+    """
+    Ask the LLM for a move.
+    If the response is invalid or illegal, fall back to the first legal move.
+
+    If return_debug=True, return a tuple:
+    (final_move, debug_info)
+    """
+    legal_moves = get_legal_moves(board)
+
+    prompt = build_move_prompt(board, player)
+
+    start_time = time.perf_counter()
+    response_text = llm_client.get_chat_response(
+        prompt,
+        system_message="You are a Connect-4 agent. Return only valid JSON."
+    )
+    end_time = time.perf_counter()
+
+    parsed_move = parse_move_response(response_text)
+
+    debug_info = {
+        "raw_response": response_text,
+        "parsed_move": parsed_move,
+        "used_fallback": False,
+        "fallback_reason": None,
+        "latency_seconds": end_time - start_time,
+    }
+
+    if parsed_move is None:
+        debug_info["used_fallback"] = True
+        debug_info["fallback_reason"] = "parse_failure"
+        final_move = legal_moves[0]
+    elif parsed_move not in legal_moves:
+        debug_info["used_fallback"] = True
+        debug_info["fallback_reason"] = "illegal_move"
+        final_move = legal_moves[0]
+    else:
+        final_move = parsed_move
+
+    if return_debug:
+        return final_move, debug_info
+
+    return final_move

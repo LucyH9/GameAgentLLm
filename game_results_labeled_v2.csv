@@ -1,0 +1,13 @@
+matchup,baseline_type,game_number,llm_side,winner,llm_won,baseline_won,draw,illegal_move,fallback_uses_this_game,llm_moves_this_game,llm_total_latency_seconds,llm_avg_latency_seconds
+LLM vs Random,Random,1,X,X,True,False,False,False,0,5,4.2931,0.8586
+LLM vs Random,Random,2,X,X,True,False,False,False,0,4,2.6636,0.6659
+LLM vs Random,Random,3,X,X,True,False,False,False,0,5,3.099,0.6198
+LLM vs Random,Random,1,O,X,False,True,False,False,0,4,3.1423,0.7856
+LLM vs Random,Random,2,O,X,False,True,False,False,0,8,4.8621,0.6078
+LLM vs Random,Random,3,O,X,False,True,False,False,0,3,1.8887,0.6296
+LLM vs Heuristic,Heuristic,1,X,O,False,True,False,False,0,10,6.4557,0.6456
+LLM vs Heuristic,Heuristic,2,X,O,False,True,False,False,0,10,6.3088,0.6309
+LLM vs Heuristic,Heuristic,3,X,O,False,True,False,False,0,10,6.462,0.6462
+LLM vs Heuristic,Heuristic,1,O,X,False,True,False,False,0,6,3.8296,0.6383
+LLM vs Heuristic,Heuristic,2,O,X,False,True,False,False,0,6,4.2758,0.7126
+LLM vs Heuristic,Heuristic,3,O,X,False,True,False,False,0,6,4.0188,0.6698

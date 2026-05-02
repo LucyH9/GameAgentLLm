@@ -1,46 +1,16 @@
-from game.connect4 import (
-    create_board,
-    print_board,
-    get_legal_moves,
-    drop_piece,
-    check_winner,
-    is_draw,
-    PLAYER_X,
-    PLAYER_O,
-)
+from llm.azure_client import AzureLLMClient
+from experiments.llm_experiments import run_llm_vs_random, run_llm_vs_heuristic
+from experiments.csv_logger import append_result_to_csv
 
-def switch_player(player):
-    if player == PLAYER_X:
-        return PLAYER_O
-    return PLAYER_X
+client = AzureLLMClient()
 
-board = create_board()
-current_player = PLAYER_X
+results = [
+    run_llm_vs_random(client, num_games=10, llm_as="X", log_games=True),
+    run_llm_vs_random(client, num_games=10, llm_as="O", log_games=True),
+    run_llm_vs_heuristic(client, num_games=10, llm_as="X", log_games=True),
+    run_llm_vs_heuristic(client, num_games=10, llm_as="O", log_games=True),
+]
 
-while True:
-    print_board(board)
-    print("--------------------------------------------------------------------")
-    print(f"Player {current_player}'s turn")
-    print("Legal moves:", get_legal_moves(board))
-
-    try:
-        col = int(input("Choose a column: "))
-    except ValueError:
-        print("Please enter a number.")
-        continue
-
-    if not drop_piece(board, col, current_player):
-        print("Illegal move. Try again.")
-        continue
-
-    if check_winner(board, current_player):
-        print_board(board)
-        print(f"Player {current_player} wins!")
-        break
-
-    if is_draw(board):
-        print_board(board)
-        print("It's a draw!")
-        break
-
-    current_player = switch_player(current_player)
+for result in results:
+    print(result)
+    append_result_to_csv(result, filename="batch_results_10games.csv")

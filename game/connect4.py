@@ -52,6 +52,7 @@ def check_winner(board, player):
     
     # Horizontal check
     for row in range(ROWS):
+        #test
         for col in range(COLS - 3):
             if (
                 board[row][col] == player
@@ -101,3 +102,8 @@ def check_winner(board, player):
 def is_draw(board):
     """Return True if the board is full."""
     return len(get_legal_moves(board)) == 0
+
+#helper method to copy the board
+def copy_board(board):
+    """Return a deep copy of the board."""
+    return [row[:] for row in board]
