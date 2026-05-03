@@ -2,7 +2,7 @@ import csv
 import os
 
 
-def append_game_result_to_csv(result_dict, filename="game_results_labeled_v2.csv"):
+def append_game_result_to_csv(result_dict, filename="final_game_results_connect4.csv"):
     file_exists = os.path.isfile(filename)
     fieldnames = list(result_dict.keys())
 

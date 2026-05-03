@@ -5,6 +5,14 @@ PLAYER_X = "X"
 PLAYER_O = "O"
 
 
+def is_terminal_state(board):
+    """Return True if the game is over by win or draw."""
+    return (
+        check_winner(board, PLAYER_X)
+        or check_winner(board, PLAYER_O)
+        or is_draw(board)
+    )
+
 def create_board():
     """Create and return an empty Connect-4 board."""
     return [[EMPTY for _ in range(COLS)] for _ in range(ROWS)]
