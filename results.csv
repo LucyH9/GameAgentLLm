@@ -1,5 +1,0 @@
-matchup,games,X_wins,O_wins,draws,fallback_uses
-LLM vs Random (LLM as X),3,3,0,0,0
-LLM vs Random (LLM as O),3,0,3,0,0
-LLM vs Heuristic (LLM as X),3,0,3,0,0
-LLM vs Heuristic (LLM as O),3,3,0,0,0

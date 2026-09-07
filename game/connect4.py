@@ -1,3 +1,4 @@
+#Define board dimensions and player symbols for Connect-4.
 ROWS = 6
 COLS = 7
 EMPTY = "."
@@ -12,6 +13,7 @@ def is_terminal_state(board):
         or check_winner(board, PLAYER_O)
         or is_draw(board)
     )
+
 
 def create_board():
     """Create and return an empty Connect-4 board."""
@@ -31,36 +33,41 @@ def get_legal_moves(board):
     """Return a list of columns where a piece can still be dropped."""
     legal_moves = []
 
+    #A column is legal if the top cell is still empty.
     for col in range(COLS):
         if board[0][col] == EMPTY:
             legal_moves.append(col)
 
     return legal_moves
 
+
 def drop_piece(board, col, player):
     """
     Drop a piece into a column.
     Returns True if successful, False if the move is illegal.
     """
+    #Reject columns that are outside the board.
     if col < 0 or col >= COLS:
         return False
 
+    #Reject moves in a full column.
     if board[0][col] != EMPTY:
         return False
 
+    #Place the piece in the lowest available row of the chosen column.
     for row in range(ROWS - 1, -1, -1):
         if board[row][col] == EMPTY:
             board[row][col] = player
             return True
+
     return False
 
-#Checks for wincon
+
 def check_winner(board, player):
     """Return True if the given player has 4 in a row."""
-    
-    # Horizontal check
+
+    #Check for four connected pieces horizontally.
     for row in range(ROWS):
-        #test
         for col in range(COLS - 3):
             if (
                 board[row][col] == player
@@ -70,7 +77,7 @@ def check_winner(board, player):
             ):
                 return True
 
-    # Vertical check
+    #Check for four connected pieces vertically.
     for row in range(ROWS - 3):
         for col in range(COLS):
             if (
@@ -81,7 +88,7 @@ def check_winner(board, player):
             ):
                 return True
 
-    # Diagonal down-right check
+    #Check for four connected pieces on a down-right diagonal.
     for row in range(ROWS - 3):
         for col in range(COLS - 3):
             if (
@@ -92,7 +99,7 @@ def check_winner(board, player):
             ):
                 return True
 
-    # Diagonal up-right check
+    #Check for four connected pieces on an up-right diagonal.
     for row in range(3, ROWS):
         for col in range(COLS - 3):
             if (
@@ -106,12 +113,11 @@ def check_winner(board, player):
     return False
 
 
-#Draw condition
 def is_draw(board):
     """Return True if the board is full."""
     return len(get_legal_moves(board)) == 0
 
-#helper method to copy the board
+
 def copy_board(board):
     """Return a deep copy of the board."""
     return [row[:] for row in board]

@@ -1,3 +1,5 @@
+
+#Import needed objects
 from game.connect4 import (
     create_board,
     print_board,
@@ -33,8 +35,8 @@ def play_game(player_x_func, player_o_func, print_game=False):
         success = drop_piece(board, move, current_player)
 
         if not success:
-            # This should not happen for your random/heuristic players,
-            # but we handle it anyway just in case :D
+            #This should not happen for your random/heuristic players,
+            #but we handle it anyway just in case :D
             winner = PLAYER_O if current_player == PLAYER_X else PLAYER_X
 
             if print_game:

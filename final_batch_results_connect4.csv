@@ -1,7 +1,0 @@
-matchup,games,X_wins,O_wins,draws,fallback_uses,llm_total_moves,llm_total_latency_seconds,llm_avg_latency_seconds
-LLM vs Random (LLM as X),100,94,6,0,0,547,323.9892,0.5923
-LLM vs Random (LLM as O),100,38,62,0,0,662,382.9031,0.5784
-LLM vs Heuristic (LLM as X),100,0,100,0,0,1000,579.4583,0.5795
-LLM vs Heuristic (LLM as O),100,100,0,0,0,600,340.1817,0.567
-LLM vs Minimax (LLM as X),100,0,100,0,0,800,472.0485,0.5901,3
-LLM vs Minimax (LLM as O),100,100,0,0,0,580,330.3234,0.5695,3

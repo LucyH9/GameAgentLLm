@@ -44,13 +44,13 @@ def score_position(board, player):
     opponent = PLAYER_O if player == PLAYER_X else PLAYER_X
     score = 0
 
-    # Strong terminal checks first
+    #Strong terminal checks first
     if check_winner(board, player):
         return 100000
     if check_winner(board, opponent):
         return -100000
 
-    # Center column preference
+    #Center column preference
     center_col = COLS // 2
     center_array = [board[row][center_col] for row in range(ROWS)]
     center_count = center_array.count(player)
